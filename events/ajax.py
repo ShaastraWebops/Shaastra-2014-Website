@@ -131,20 +131,22 @@ def save_tab(request, form):
 @dajaxice_register
 def add_tab(request):
 
-    # loads a form for creating a new tab
+    ''' Loads a form for creating a new tab
+        TabAddForm is from the coords app forms'''
 
     f = TabAddForm()
-    template = loader.get_template('ajax/events/tab_add_form.html')
+    template = loader.get_template('ajax/events/tab_add_form.html') 
     t = template.render(RequestContext(request, locals()))
     dajax = Dajax()
     dajax.assign('#detail', 'innerHTML', t)
     return dajax.json()
 
-
 @dajaxice_register
 def edit_tab(request, tab_id):
 
-    # loads a form for editing the tab details
+    '''Loads a form for editing the tab details
+       TabAddForm is from the coords app forms
+       Tab is from events.models'''
 
     tab = Tab.objects.get(id=tab_id)
     f = TabAddForm(instance=tab)
