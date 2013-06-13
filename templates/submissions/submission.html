@@ -1,0 +1,12 @@
+<h4>{{event.title}}'s question list.</h4>
+mcqs:
+<br/>
+{% for q in mcqs %}
+    <li><a href="#submission/{{event.id}}/mcques/{{q.id}}/">{{q.q_number}}</a></li>
+{% endfor %}<br/>
+text:<br/>
+{% for q in subjectives %}
+    <li><a href="#submission/{{event.id}}/subques/{{q.id}}/">{{q.q_number}}</a></li>
+{% endfor %}
+<div id="q_detail"></div>
+
