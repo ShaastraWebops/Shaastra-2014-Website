@@ -271,10 +271,14 @@ def load_question_tab(request):
 def add_subjective(request):
 
     # loads a form for creating a new subjective question.
+    '''
+    loads a form for creating a subjective question
+    the form AddSubjectiveQuestionForm() is from coord/forms
+    '''
 
     f = AddSubjectiveQuestionForm()
     template = \
-        loader.get_template('ajax/events/add_subjective_form.html')
+        loader.get_template('ajax/events/add_subjective_form.html')#Opens the template
     t = template.render(RequestContext(request, locals()))
     dajax = Dajax()
     dajax.assign('#detail', 'innerHTML', t)
@@ -285,6 +289,10 @@ def add_subjective(request):
 def save_subjective(request, form):
 
     # validates and saves a subjective question
+    '''
+    Checks if form is valid.If its valid the subjective question is saved
+    Otherwise a new subjective question is loaded.
+    '''
 
     from django.conf import settings
     f = AddSubjectiveQuestionForm(form)
@@ -295,7 +303,7 @@ def save_subjective(request, form):
         unsaved_ques.save()
         text_questions = event.subjectivequestion_set.all()
         mcqs = event.objectivequestion_set.all()
-        template = loader.get_template('ajax/events/question_tab.html')
+        template = loader.get_template('ajax/events/question_tab.html')#Opens the template
         t = template.render(RequestContext(request, locals()))
         dajax = Dajax()
         dajax.assign('#detail', 'innerHTML', t)
